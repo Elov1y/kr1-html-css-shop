@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа — Интернет-магазин</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a class="site-header__logo" href="index.html">
+                Интернет-магазин
+            </a>
+
+            <nav class="site-nav" aria-label="Основная навигация">
+                <a class="site-nav__link" href="index.html">Главная</a>
+                <a class="site-nav__link" href="catalog.html">Каталог</a>
+                <a class="site-nav__link" href="product.html">Товар</a>
+                <a class="site-nav__link" href="order.html">Оформление заказа</a>
+                <a class="site-nav__link" href="contacts.html">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a href="index.html">Главная</a>
+            <span aria-hidden="true"> / </span>
+            <a href="catalog.html">Каталог</a>
+            <span aria-hidden="true"> / </span>
+            <a href="product.html">Товар</a>
+            <span aria-hidden="true"> / </span>
+            <span>Оформление заказа</span>
+        </nav>
+
+        <section class="order-section">
+            <h1>Оформление заказа</h1>
+            <p>Заполните форму, чтобы оставить заявку на товар.</p>
+
+            <form class="order-form" action="#" method="post">
+                <div class="order-form__group">
+                    <label for="customer-name">Ваше имя</label>
+                    <input
+                        type="text"
+                        id="customer-name"
+                        name="customer-name"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="order-form__group">
+                    <label for="customer-email">Электронная почта</label>
+                    <input
+                        type="email"
+                        id="customer-email"
+                        name="customer-email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="order-form__group">
+                    <label for="customer-phone">Телефон</label>
+                    <input
+                        type="tel"
+                        id="customer-phone"
+                        name="customer-phone"
+                        autocomplete="tel"
+                        required
+                    >
+                </div>
+
+                <div class="order-form__group">
+                    <label for="order-product">Товар</label>
+                    <select id="order-product" name="product" required>
+                        <option value="">Выберите товар</option>
+                        <option value="Товар 1">Товар 1</option>
+                        <option value="Товар 2">Товар 2</option>
+                        <option value="Товар 3">Товар 3</option>
+                    </select>
+                </div>
+
+                <div class="order-form__group">
+                    <label for="order-quantity">Количество</label>
+                    <input
+                        type="number"
+                        id="order-quantity"
+                        name="quantity"
+                        min="1"
+                        value="1"
+                        required
+                    >
+                </div>
+
+                <div class="order-form__group">
+                    <label for="order-comment">Комментарий к заказу</label>
+                    <textarea
+                        id="order-comment"
+                        name="comment"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <div class="order-form__group">
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="personal-data"
+                            required
+                        >
+                        Согласен на обработку персональных данных
+                    </label>
+                </div>
+
+                <button class="button" type="submit">
+                    Отправить заявку
+                </button>
+
+                <a class="button" href="catalog.html">
+                    Вернуться в каталог
+                </a>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="contacts">
+        <div class="container">
+            <p>&copy; 2026 Интернет-магазин</p>
+            <a href="index.html#contacts">Контакты</a>
+        </div>
+    </footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const product = params.get("product");
+        const productSelect = document.querySelector("#order-product");
+
+        if (product && productSelect) {
+            const matchingOption = Array.from(productSelect.options).find(
+                option => option.value === product
+            );
+
+            if (matchingOption) {
+                productSelect.value = product;
+            }
+        }
+    </script>
+</body>
+</html>

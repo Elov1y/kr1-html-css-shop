@@ -2,7 +2,7 @@
 const orderDialog = document.getElementById('order-dialog');
 
 // Получаем все кнопки заказа в карточках товаров.
-const orderButtons = document.querySelectorAll('.product-card__button');
+const orderButtons = document.querySelectorAll('button[data-product]');
 
 // Получаем кнопку закрытия модального окна.
 const closeDialogButton = document.getElementById('close-order-dialog');
@@ -11,23 +11,27 @@ const closeDialogButton = document.getElementById('close-order-dialog');
 const selectedProductInput = document.getElementById('selected-product');
 
 // Перебираем все кнопки «Заказать».
-orderButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    // Получаем название товара из data-атрибута.
-    const productName = button.dataset.product;
+if (orderDialog && selectedProductInput) {
+  orderButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      // Получаем название товара из data-атрибута.
+      const productName = button.dataset.product;
 
-    // Записываем название товара в скрытое поле формы.
-    selectedProductInput.value = productName;
+      // Записываем название товара в скрытое поле формы.
+      selectedProductInput.value = productName;
 
-    // Открываем модальное окно.
-    orderDialog.showModal();
+      // Открываем модальное окно.
+      orderDialog.showModal();
+    });
   });
-});
+}
 
 // Закрываем модальное окно по кнопке «Закрыть».
-closeDialogButton.addEventListener('click', () => {
-  orderDialog.close();
-});
+if (closeDialogButton && orderDialog) {
+  closeDialogButton.addEventListener('click', () => {
+    orderDialog.close();
+  });
+}
 
 // Получаем форму заявки.
 const orderForm = document.getElementById('order-form');
@@ -36,7 +40,8 @@ const orderForm = document.getElementById('order-form');
 const successMessage = document.getElementById('success-message');
 
 // Обрабатываем отправку формы.
-orderForm.addEventListener('submit', (event) => {
+if (orderForm && orderDialog && successMessage) {
+  orderForm.addEventListener('submit', (event) => {
   // Отменяем стандартную отправку формы,
   // потому что backend пока не подключён.
   event.preventDefault();
@@ -71,4 +76,5 @@ orderForm.addEventListener('submit', (event) => {
 
   // Закрываем модальное окно.
   orderDialog.close();
-});
+  });
+}
